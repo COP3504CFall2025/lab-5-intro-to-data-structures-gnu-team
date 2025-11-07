@@ -11,7 +11,7 @@ public:
 		T datum;
 		Node* next;
 		Node* prev;
-	}
+	};
 
 	// Behaviors
 	void printForward() const;
@@ -184,10 +184,12 @@ void LinkedList<T>::Clear() {
 
 template <typename T>
 LinkedList<T>& LinkedList<T>::operator=(LinkedList<T>&& other) noexcept {
-    if(this == other) {
+    if(this == &other) {
         return *this;
     }
 
+    Clear();
+    
     this->head = other.head;
     this->tail = other.tail;
     this->count = other.count;
