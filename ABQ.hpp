@@ -44,14 +44,14 @@ public:
 template <typename T>
 ABQ<T>::ABQ() 
     : capacity_(1),
-      size_(0),
-      data_(new T[1]) {}
+      curr_size_(0),
+      array_(new T[1]) {}
 
 template <typename T>
 ABQ<T>::ABQ(const size_t capacity)
     : capacity_(capacity),
-      size(0),
-      data_(new T[capacity]) {}
+      curr_size_(0),
+      array_(new T[capacity]) {}
 
 template <typename T>
 ABQ<T>::ABQ(const ABQ& other) {
@@ -72,7 +72,7 @@ ABQ<T>& ABQ<T>::operator=(const ABQ& rhs) {
 
     //check for badalloc
     T* temp = new T[rhs.capacity_];
-    for(int i = 0; i < rhs.capacity_) {
+    for(int i = 0; i < rhs.capacity_; ++i) {
         temp[i] = rhs.array_[i];
     }
 
@@ -81,7 +81,7 @@ ABQ<T>& ABQ<T>::operator=(const ABQ& rhs) {
     delete[] this->array_;
     this->array = temp;
 
-    return this*
+    return *this;
 }
 
 template <typename T>
@@ -119,7 +119,7 @@ ABQ<T>::~ABQ() noexcept {
     capacity_ = 0;
     curr_size_ = 0;
     delete[] array_;
-    array = nullptr;
+    array_ = nullptr;
 }
 
 template <typename T>
@@ -134,7 +134,7 @@ T* ABQ<T>::getData() const noexcept {return array_;}
 template <typename T>
 void ABQ<T>::enqueue(const T& data) {
     if(capacity_ == curr_size_) {
-        temp_array = new T[capacity_ * scale_factor_];
+        T* temp_array = new T[capacity_ * scale_factor_];
         capacity_ *= scale_factor_;
         for(int i = 0; i < curr_size_; ++i) {
             temp_array[i] = array_[i];

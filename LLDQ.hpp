@@ -49,41 +49,39 @@ void LLDQ<T>::pushBack(const T& item) {
 
 template <typename T>
 T LLDQ<T>::popFront() {
-    if(list.getHead() == nullptr) {
+    if(list.getHead() == 0) {
         throw std::runtime_error("ERROR: popFront() on empty deque.");
     }
-    T = list.getHead()->datum;
+    T result = list.getHead()->datum;
     list.removeHead();
-    return T;
+    return result;
 }
 
 template <typename T>
 T LLDQ<T>::popBack() {
-    if(list.getTail() == nullptr) {
-        throw std::runtime_error("ERROR: popBack() on empty deque.")
+    if(list.getCount() == 0) {
+        throw std::runtime_error("ERROR: popBack() on empty deque.");
     }
-    T = list.getTail()->datum;
+    T result = list.getTail()->datum;
     list.removeTail();
-    return T;
+    return result;
 }
 
 template <typename T>
 const T& LLDQ<T>::front() const {
-    LinkedList::Node* result = list.getHead();
-    if(result == nullptr) {
+    if(list.getCount() == 0) {
         throw std::runtime_error("ERROR: front() on empty deque.");
     }
-    return result->datum;
+    return list.getHead()->datum;
 
 }
 
 template <typename T>
 const T& LLDQ<T>::back() const {
-    LinkedList::Node* result = list.getTail()
-    if(result == nullptr) {
+    if(list.getCount() == 0) {
         throw std::runtime_error("ERROR: back() on empty deque.");
     }
-    return result->datum;
+    return list.getTail()->datum;
 }
 
 template <typename T>

@@ -34,7 +34,7 @@ public:
 	void Clear();
 
 	// Operators
-	LinkedList<T>& operator=(LinkedList<T>&& other) noexcept;
+	LinkedList<T>& operator=(LinkedList<T>&& rhs) noexcept;
 	LinkedList<T>& operator=(const LinkedList<T>& rhs);
 
 	// Construction/Destruction
@@ -182,56 +182,58 @@ void LinkedList<T>::Clear() {
     }
 }
 
+// Move Assignment
 template <typename T>
-LinkedList<T>& LinkedList<T>::operator=(LinkedList<T>&& other) noexcept {
-    if(this == &other) {
+LinkedList<T>& LinkedList<T>::operator=(LinkedList<T>&& rhs) noexcept {
+    if(this == &rhs) {
         return *this;
     }
 
     Clear();
-    
-    this->head = other.head;
-    this->tail = other.tail;
-    this->count = other.count;
 
-    other.head = nullptr;
-    other.tail = nullptr;
-    other.count = nullptr.
+    this->head = rhs.head;
+    this->tail = rhs.tail;
+    this->count = rhs.count;
+
+    rhs.head = nullptr;
+    rhs.tail = nullptr;
+    rhs.count = nullptr;
     
     return *this;
 }
 
+// Copy Assignment
 template <typename T>
-LinkedList<T>& LinkedList<T>::operator=(const LinkedList<T>& other) {
-    if(this == &other) {
+LinkedList<T>& LinkedList<T>::operator=(const LinkedList<T>& rhs) {
+    if(this == &rhs) {
         return *this;
     }
 
     Clear();
 
-    Node* current = other.getHead()
+    Node* current = rhs.getHead();
     while(current != nullptr) {
         addTail(current->data);
         current = current->next;
     }
-    
-    return *this;
+
 }
 
+// Default Constructor
 template <typename T>
 LinkedList<T>::LinkedList() : head(nullptr), tail(nullptr), count(0) {}
 
+// Copy Constructor
 template <typename T>
 LinkedList<T>::LinkedList(const LinkedList<T>& other) {
-    Node* current = other.getHead()
+    Node* current = other.getHead();
     while(current != nullptr) {
         addTail(current->data);
         current = current->next;
     }
-    
-    return *this;
 }
 
+// Move Constructor
 template <typename T>
 LinkedList<T>::LinkedList(LinkedList<T>&& other) noexcept {
     this->head = other.head;
@@ -240,11 +242,10 @@ LinkedList<T>::LinkedList(LinkedList<T>&& other) noexcept {
 
     other.head = nullptr;
     other.tail = nullptr;
-    other.count = nullptr.
-    
-    return *this;
+    other.count = nullptr;
 }
 
+// Destructor
 template <typename T>
 LinkedList<T>::~LinkedList() {
     Clear();

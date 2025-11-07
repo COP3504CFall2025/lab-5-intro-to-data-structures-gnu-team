@@ -47,11 +47,10 @@ T LLQ<T>::dequeue() {
 
 template <typename T>
 T LLQ<T>::peek() const {
-    LinkedList::Node* result = list.getHead()
-    if(result == nullptr) {
+    if(list.getCount() == 0) {
         throw std::runtime_error("ERROR: peek() on empty queue.");
     }
-    return result->datum;
+    return list.getHead();
 }
 
 template <typename T>

@@ -6,36 +6,33 @@
 
 template <typename T>
 class StackInterface {
-    std::size_t size;
 public:
-    void push(const T& item) = 0;
-    T pop() = 0;
-    T peek() const = 0;
-    std::size_t getSize() const noexcept {return size;}
+    virtual void push(const T& item) = 0;
+    virtual T pop() = 0;
+    virtual T peek() const = 0;
+    virtual std::size_t getSize() const noexcept = 0;
 };
 
 
 template <typename T>
 class QueueInterface {
-    std::size_t size;
 public:
-    void enqueue(const T& item);
-    T dequeue();
-    T peek() const;
-    std::size_t getSize() const noexcept {return size;}
+    virtual void enqueue(const T& item) = 0;
+    virtual T dequeue() = 0;
+    virtual T peek() const = 0;
+    virtual std::size_t getSize() const noexcept = 0;
 };
 
 
 template <typename T>
 class DequeInterface {
-    std::size_t size;
 public:
-    void pushFront(const T& item);
-    void pushBack(const T& item);
-    T popFront();
-    T popBack();
-    const T& front() const;
-    const  T& back() const;
-    std::size_t getSize() const noexcept {return size;}
+    virtual void pushFront(const T& item) = 0;
+    virtual void pushBack(const T& item) = 0;
+    virtual T popFront() = 0;
+    virtual T popBack() = 0;
+    virtual const T& front() const = 0;
+    virtual const T& back() const = 0;
+    virtual std::size_t getSize() const noexcept = 0;
 };
 
