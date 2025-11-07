@@ -8,7 +8,7 @@ template <typename T>
 class LinkedList {
 public:
 	struct Node {
-		T datum;
+		T data;
 		Node* next;
 		Node* prev;
 	};
@@ -31,7 +31,7 @@ public:
 	// Removal
 	bool removeHead();
 	bool removeTail();
-	void Clear();
+	void clear();
 
 	// Operators
 	LinkedList<T>& operator=(LinkedList<T>&& rhs) noexcept;
@@ -57,7 +57,7 @@ template <typename T>
 void LinkedList<T>::printForward() const {
     Node* next = head;
     while(next != nullptr) {
-        std::cout << next->datum << std::endl;
+        std::cout << next->data << std::endl;
         next = next->next;
     }
 }
@@ -66,7 +66,7 @@ template <typename T>
 void LinkedList<T>::printReverse() const {
     Node* prev = tail;
     while(prev != nullptr) {
-        std::cout << prev->datum << std::endl;
+        std::cout << prev->data << std::endl;
         prev = prev->next;
     }
 }
@@ -176,7 +176,7 @@ bool LinkedList<T>::removeTail() {
 }
 
 template <typename T>
-void LinkedList<T>::Clear() {
+void LinkedList<T>::clear() {
     while(count > 0) {
         removeHead();
     }
@@ -189,7 +189,7 @@ LinkedList<T>& LinkedList<T>::operator=(LinkedList<T>&& rhs) noexcept {
         return *this;
     }
 
-    Clear();
+    clear();
 
     this->head = rhs.head;
     this->tail = rhs.tail;
@@ -209,7 +209,7 @@ LinkedList<T>& LinkedList<T>::operator=(const LinkedList<T>& rhs) {
         return *this;
     }
 
-    Clear();
+    clear();
 
     Node* current = rhs.getHead();
     while(current != nullptr) {
@@ -248,7 +248,7 @@ LinkedList<T>::LinkedList(LinkedList<T>&& other) noexcept {
 // Destructor
 template <typename T>
 LinkedList<T>::~LinkedList() {
-    Clear();
+    clear();
 }
 
 
