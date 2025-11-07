@@ -15,7 +15,7 @@ private:
 
 public:
     // Constructor
-    LLDQ();
+    LLDQ() = default;
 
     // Core Insertion Operations
     void pushFront(const T& item) override;
@@ -31,10 +31,73 @@ public:
 
     // Getter
     std::size_t getSize() const noexcept override;
+
+    //Printing
+    void PrintForward() const;
+    void PrintReverse() const;
 };
 
+template <typename T>
+void LLDQ<T>::pushFront(const T& item) {
+    list.addHead(item);
+}
 
+template <typename T>
+void LLDQ<T>::pushBack(const T& item) {
+    list.addTail(item);
+}
 
+template <typename T>
+T LLDQ<T>::popFront() {
+    if(list.getHead() == nullptr) {
+        throw std::runtime_error("ERROR: popFront() on empty deque.");
+    }
+    T = list.getHead()->datum;
+    list.removeHead();
+    return T;
+}
 
+template <typename T>
+T LLDQ<T>::popBack() {
+    if(list.getTail() == nullptr) {
+        throw std::runtime_error("ERROR: popBack() on empty deque.")
+    }
+    T = list.getTail()->datum;
+    list.removeTail();
+    return T;
+}
 
+template <typename T>
+const T& LLDQ<T>::front() const {
+    LinkedList::Node* result = list.getHead();
+    if(result == nullptr) {
+        throw std::runtime_error("ERROR: front() on empty deque.");
+    }
+    return result->datum;
+
+}
+
+template <typename T>
+const T& LLDQ<T>::back() const {
+    LinkedList::Node* result = list.getTail()
+    if(result == nullptr) {
+        throw std::runtime_error("ERROR: back() on empty deque.");
+    }
+    return result->datum;
+}
+
+template <typename T>
+std::size_t LLDQ<T>::getSize() const noexcept {
+    return list.getCount();
+}
+
+template <typename T>
+void LLDQ<T>::PrintForward() const {
+    list.printForward();
+}
+
+template <typename T>
+void LLDQ<T>::PrintReverse() const {
+    list.printReverse();
+}
 

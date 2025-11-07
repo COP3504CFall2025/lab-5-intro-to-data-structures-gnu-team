@@ -11,7 +11,7 @@ private:
     LinkedList<T> list;
 public:
     // Constructor
-    LLS();
+    LLS() = default;
 
     // Insertion
     void push(const T& item) override;
@@ -23,5 +23,46 @@ public:
     T peek() const override;
 
     //Getters
-    std::size_t getSize() const noexcept override;
+    std::size_t getSize() const noexcept override;\
+
+    //Printing
+    void PrintForward() const;
+    void PrintReverse() const;
 };
+
+template <typename T>
+void LLS<T>::push(const T& item) {
+    list.addTail(item);
+}
+
+template <typename T>
+T LLS<T>::pop() {
+    if(list->getHead() == nullptr) {
+        throw std::runtime_error("ERROR: pop() on empty stack");
+    }
+    T result = list.getHead()->datum;
+    list.removeHead();
+    return result->datum;
+}
+
+template <typename T>
+T LLS<T>::peek() const {
+    LinkedList::Node* result = list.getHead();
+    if(result == nullptr) {
+        throw std::runtime_error("ERROR: peek() on empty stack");
+    }
+    return result->datum;
+}
+
+template <typename T>
+size_t LLS<T>::getSize() const noexcept {return list.getCount();}
+
+template <typename T>
+void LLS<T>::PrintForward() const {
+    list.printForward();
+}
+
+template <typename T>
+void LLS<T>::PrintReverse() const {
+    list.printReverse();
+}
