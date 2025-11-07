@@ -78,7 +78,7 @@ ABDQ<T>::ABDQ(const ABDQ& other) {
     this->front_ = 0;
     this->back_ = size_;
 
-    for(int i = front_; i < size_; ++i) {
+    for(size_t i = front_; i < size_; ++i) {
         size_t index = (front_ + i) % capacity_;
         this->data_[i] = other.data_[index];
     }
@@ -92,14 +92,14 @@ ABDQ<T>& ABDQ<T>::operator=(const ABDQ& rhs) {
     }
 
     T* temp_array = new T[rhs.capacity_];
-    delete[] this->array_;
-    this->array_ = temp_array;
+    delete[] this->data_;
+    this->data_ = temp_array;
     this->capacity_ = rhs.capacity_;
     this->size_ = rhs.size_;
     this->front_ = 0;
     this->back_ = size_;
 
-    for(int i = front_; i < size_; ++i) {
+    for(size_t i = front_; i < size_; ++i) {
         size_t index = (front_ + i) % capacity_;
         this->data_[i] = rhs.data_[index];
     }
