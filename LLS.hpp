@@ -37,17 +37,17 @@ void LLS<T>::push(const T& item) {
 
 template <typename T>
 T LLS<T>::pop() {
-    if(list->getHead() == nullptr) {
+    if(list.getHead() == nullptr) {
         throw std::runtime_error("ERROR: pop() on empty stack");
     }
     T result = list.getHead()->data;
     list.removeHead();
-    return result->data;
+    return result;
 }
 
 template <typename T>
 T LLS<T>::peek() const {
-    if(list.getCount == 0) {
+    if(list.getCount() == 0) {
         throw std::runtime_error("ERROR: peek() on empty stack");
     }
     return list.getHead()->data;
