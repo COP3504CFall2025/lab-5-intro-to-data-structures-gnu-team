@@ -117,6 +117,7 @@ template <typename T>
 void LinkedList<T>::addTail(const T& data) {
     Node* current = new Node {data, nullptr, nullptr};
 
+    // No elements
     if(tail == nullptr) {
         head = current;
         tail = current;
@@ -143,9 +144,10 @@ bool LinkedList<T>::removeHead() {
     }
     // List has multiple elements
     else {
+        Node* temp = head;
         head = head->next;
-        delete head->prev;
         head->prev = nullptr;
+        delete temp;
     }
     
     count--;
@@ -166,9 +168,10 @@ bool LinkedList<T>::removeTail() {
     }
     // List has multiple elements
     else {
+        Node* temp = tail;
         tail = tail->prev;
-        delete tail->next;
         tail->next = nullptr;
+        delete temp;
     }
     
     count--;
@@ -227,6 +230,10 @@ LinkedList<T>::LinkedList() : head(nullptr), tail(nullptr), count(0) {}
 // Copy Constructor
 template <typename T>
 LinkedList<T>::LinkedList(const LinkedList<T>& other) {
+    head = nullptr;
+    tail = nullptr;
+    count = 0;
+
     const Node* current = other.getHead();
     while(current != nullptr) {
         addTail(current->data);
