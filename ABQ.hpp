@@ -164,10 +164,12 @@ T ABQ<T>::dequeue() {
         throw std::runtime_error("ERROR: dequeue() on empty queue.");
     }
 
+    T result = array_[0];
     for(std::size_t i = 0; i < curr_size_ - 1; ++i) {
         array_[i] = array_[i + 1];
     }
     curr_size_--;
+    return result;
 }
 
 template <typename T>
