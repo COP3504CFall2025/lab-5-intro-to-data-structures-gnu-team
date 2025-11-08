@@ -172,13 +172,23 @@ T ABS<T>::peek() const {
 
 template <typename T>
 T ABS<T>::pop() {
-    if(curr_size_ > 0) {
-        curr_size_--;
-        return array_[curr_size_];
-    } 
-    else {
+    if(curr_size_ == 0) {
         throw std::runtime_error("ERROR: pop() on stack with no elements");
     }
+
+    curr_size_--;
+    // Check if array is sparce
+    if((curr_size_ > 0) && (curr_size_ = capacity_ / 4)) {
+        T* temp_array = new T[capacity_ / scale_factor_];
+        for(std::size_t i = 0; i < curr_size_; ++i ) {
+            temp_array[i] = array_[i + 1];
+        }
+        delete[] array_;
+        array_ = temp_array;
+        capacity_ /= scale_factor_;
+    }
+    
+    return array_[curr_size_];
 }
 
 template <typename T>

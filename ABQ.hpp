@@ -57,6 +57,7 @@ ABQ<T>::ABQ(const size_t capacity)
       curr_size_(0),
       array_(new T[capacity]) {}
 
+// Copy Constructor
 template <typename T>
 ABQ<T>::ABQ(const ABQ& other) {
     this->capacity_ = other.capacity_;
@@ -68,6 +69,7 @@ ABQ<T>::ABQ(const ABQ& other) {
     }
 }
 
+// Copy Assignment
 template <typename T>
 ABQ<T>& ABQ<T>::operator=(const ABQ& rhs) {
     if(this == &rhs) {
@@ -166,10 +168,23 @@ T ABQ<T>::dequeue() {
     }
 
     T result = array_[0];
-    for(std::size_t i = 0; i < curr_size_ - 1; ++i) {
-        array_[i] = array_[i + 1];
-    }
     curr_size_--;
+
+    if(curr_size_ > 0  && curr_size_ == capacity_ / 4) {
+        T* temp_array = new T[capacity_ / scale_factor_];
+        for(std::size_t i = 0; i < curr_size_; ++i ) {
+            temp_array[i] = array_[i + 1];
+        }
+        delete[] array_;
+        array_ = temp_array;
+        capacity_ /= scale_factor_;
+    }
+    else {
+        for(std::size_t i = 0; i < curr_size_; ++i) {
+            array_[i] = array_[i + 1];
+        }
+    }
+    
     return result;
 }
 

@@ -37,7 +37,7 @@ void LLS<T>::push(const T& item) {
 
 template <typename T>
 T LLS<T>::pop() {
-    if(list.getHead() == nullptr) {
+    if(list.getCount() == 0) {
         throw std::runtime_error("ERROR: pop() on empty stack");
     }
     T result = list.getHead()->data;
