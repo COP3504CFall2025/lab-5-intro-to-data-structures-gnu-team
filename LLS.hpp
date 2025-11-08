@@ -40,9 +40,9 @@ T LLS<T>::pop() {
     if(list->getHead() == nullptr) {
         throw std::runtime_error("ERROR: pop() on empty stack");
     }
-    T result = list.getHead()->datum;
+    T result = list.getHead()->data;
     list.removeHead();
-    return result->datum;
+    return result->data;
 }
 
 template <typename T>
@@ -50,7 +50,7 @@ T LLS<T>::peek() const {
     if(list.getCount == 0) {
         throw std::runtime_error("ERROR: peek() on empty stack");
     }
-    return list.getHead();
+    return list.getHead()->data;
 }
 
 template <typename T>

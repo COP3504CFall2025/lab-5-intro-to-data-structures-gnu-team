@@ -40,7 +40,7 @@ T LLQ<T>::dequeue() {
     if(list.getHead() == nullptr) {
         throw std::runtime_error("ERROR: dequeue() on empty queue.");
     }
-    T result = list.getTail()->datum;
+    T result = list.getTail()->data;
     list.removeTail();
     return result;
 }

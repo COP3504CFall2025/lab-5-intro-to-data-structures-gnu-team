@@ -52,7 +52,7 @@ T LLDQ<T>::popFront() {
     if(list.getHead() == 0) {
         throw std::runtime_error("ERROR: popFront() on empty deque.");
     }
-    T result = list.getHead()->datum;
+    T result = list.getHead()->data;
     list.removeHead();
     return result;
 }
@@ -62,7 +62,7 @@ T LLDQ<T>::popBack() {
     if(list.getCount() == 0) {
         throw std::runtime_error("ERROR: popBack() on empty deque.");
     }
-    T result = list.getTail()->datum;
+    T result = list.getTail()->data;
     list.removeTail();
     return result;
 }
@@ -72,7 +72,7 @@ const T& LLDQ<T>::front() const {
     if(list.getCount() == 0) {
         throw std::runtime_error("ERROR: front() on empty deque.");
     }
-    return list.getHead()->datum;
+    return list.getHead()->data;
 
 }
 
@@ -81,7 +81,7 @@ const T& LLDQ<T>::back() const {
     if(list.getCount() == 0) {
         throw std::runtime_error("ERROR: back() on empty deque.");
     }
-    return list.getTail()->datum;
+    return list.getTail()->data;
 }
 
 template <typename T>

@@ -197,7 +197,7 @@ LinkedList<T>& LinkedList<T>::operator=(LinkedList<T>&& rhs) noexcept {
 
     rhs.head = nullptr;
     rhs.tail = nullptr;
-    rhs.count = nullptr;
+    rhs.count = 0;
     
     return *this;
 }
@@ -217,6 +217,7 @@ LinkedList<T>& LinkedList<T>::operator=(const LinkedList<T>& rhs) {
         current = current->next;
     }
 
+    return *this;
 }
 
 // Default Constructor
@@ -242,7 +243,7 @@ LinkedList<T>::LinkedList(LinkedList<T>&& other) noexcept {
 
     other.head = nullptr;
     other.tail = nullptr;
-    other.count = nullptr;
+    other.count = 0;
 }
 
 // Destructor
