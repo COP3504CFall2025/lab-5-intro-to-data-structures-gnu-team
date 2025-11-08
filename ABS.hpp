@@ -35,6 +35,8 @@ public:
 
     T pop() override;
 
+    void print() const;
+
 private:
     size_t capacity_;
     size_t curr_size_;
@@ -56,6 +58,7 @@ ABS<T>::ABS(const size_t capacity)
       curr_size_(0), 
       array_(new T[capacity]) {}
 
+// Copy Constructor
 template <typename T>
 ABS<T>::ABS(const ABS& other) {
     this->capacity_ = other.capacity_;
@@ -67,6 +70,7 @@ ABS<T>::ABS(const ABS& other) {
     }
 }
 
+// Copy Assignment
 template <typename T>
 ABS<T>& ABS<T>::operator=(const ABS& rhs) {
     if(this == &rhs) {
@@ -87,6 +91,7 @@ ABS<T>& ABS<T>::operator=(const ABS& rhs) {
     return *this;
 }
 
+// Copy constructor
 template <typename T>
 ABS<T>::ABS(ABS&& other) noexcept {
     this->capacity_ = other.capacity_;
@@ -98,6 +103,7 @@ ABS<T>::ABS(ABS&& other) noexcept {
     other.array_ = nullptr;
 }
 
+// Move assignment
 template<typename T>
 ABS<T>& ABS<T>::operator=(ABS&& rhs) noexcept {
     if(this == &rhs) {
@@ -135,7 +141,7 @@ T* ABS<T>::getData() const noexcept {return array_;}
 template<typename T>
 void ABS<T>::push(const T& data) {
     if(curr_size_ == capacity_) {
-        T* array_new = new T(capacity_ * scale_factor_);
+        T* array_new = new T[capacity_ * scale_factor_];
         capacity_ *= scale_factor_;
 
         for(std::size_t i = 0; i < curr_size_; ++i) {
