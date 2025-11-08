@@ -35,7 +35,9 @@ public:
 
     T pop() override;
 
-    void print() const;
+    // Printing
+    void printForward() const;
+    void printReverse() const;
 
 private:
     size_t capacity_;
@@ -173,5 +175,19 @@ T ABS<T>::pop() {
     } 
     else {
         throw std::runtime_error("ERROR: pop() on stack with no elements");
+    }
+}
+
+template <typename T>
+void ABS<T>::printForward() const {
+    for(std::size_t i = 0; i < curr_size_; ++i) {
+        std::cout << array_[i] << std::endl;
+    }
+}
+
+template <typename T>
+void ABS<T>::printReverse() const {
+    for(std::size_t i = curr_size_ - 1; i >= 0; ++i) {
+        std::cout << array_[i] << std::endl;
     }
 }
