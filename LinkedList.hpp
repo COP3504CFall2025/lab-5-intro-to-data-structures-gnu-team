@@ -160,7 +160,7 @@ bool LinkedList<T>::removeTail() {
     }
     // List has one element
     else if(tail->prev == nullptr) {
-        delete prev;
+        delete tail->prev;
         tail = nullptr;
         head = nullptr;
     }
@@ -211,7 +211,7 @@ LinkedList<T>& LinkedList<T>::operator=(const LinkedList<T>& rhs) {
 
     clear();
 
-    Node* current = rhs.getHead();
+    const Node* current = rhs.getHead();
     while(current != nullptr) {
         addTail(current->data);
         current = current->next;
@@ -227,7 +227,7 @@ LinkedList<T>::LinkedList() : head(nullptr), tail(nullptr), count(0) {}
 // Copy Constructor
 template <typename T>
 LinkedList<T>::LinkedList(const LinkedList<T>& other) {
-    Node* current = other.getHead();
+    const Node* current = other.getHead();
     while(current != nullptr) {
         addTail(current->data);
         current = current->next;
