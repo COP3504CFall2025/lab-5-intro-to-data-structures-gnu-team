@@ -122,6 +122,8 @@ ABS<T>& ABS<T>::operator=(ABS&& rhs) noexcept {
     rhs.capacity_ = 0;
     rhs.curr_size_ = 0;
     rhs.array_ = nullptr;
+
+    return *this;
 }
 
 template<typename T>
