@@ -54,6 +54,11 @@ T LLQ<T>::peek() const {
 }
 
 template <typename T>
+std::size_t LLQ<T>::getSize() const noexcept {
+    return list.getCount();
+}
+
+template <typename T>
 void LLQ<T>::PrintForward() const {
     list.printForward();
 }
