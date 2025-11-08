@@ -32,7 +32,7 @@ public:
 
 template <typename T>
 void LLS<T>::push(const T& item) {
-    list.addTail(item);
+    list.addHead(item);
 }
 
 template <typename T>
