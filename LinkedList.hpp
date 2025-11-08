@@ -160,7 +160,7 @@ bool LinkedList<T>::removeTail() {
     }
     // List has one element
     else if(tail->prev == nullptr) {
-        delete tail->prev;
+        delete tail;
         tail = nullptr;
         head = nullptr;
     }
