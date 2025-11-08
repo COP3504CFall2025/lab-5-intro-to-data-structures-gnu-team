@@ -179,7 +179,7 @@ T ABS<T>::pop() {
     curr_size_--;
     T result = array_[curr_size_];
     // Check if array is sparce
-    if((curr_size_ > 0) && (curr_size_ == capacity_ / 4)) {
+    if((curr_size_ > 0) && (curr_size_ == capacity_ / scale_factor_)) {
         T* temp_array = new T[capacity_ / scale_factor_];
         for(std::size_t i = 0; i < curr_size_; ++i ) {
             temp_array[i] = array_[i];
