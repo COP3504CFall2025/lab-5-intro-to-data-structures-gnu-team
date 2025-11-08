@@ -50,7 +50,7 @@ T LLQ<T>::peek() const {
     if(list.getCount() == 0) {
         throw std::runtime_error("ERROR: peek() on empty queue.");
     }
-    return list.getHead();
+    return list.getHead()->data;
 }
 
 template <typename T>
