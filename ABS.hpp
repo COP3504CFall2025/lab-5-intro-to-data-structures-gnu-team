@@ -62,7 +62,7 @@ ABS<T>::ABS(const ABS& other) {
     this->curr_size_ = other.curr_size_;
     this->array_ = new T[capacity_];
 
-    for(int i = 0; i < curr_size_; ++i) {
+    for(std::size_t i = 0; i < curr_size_; ++i) {
         array_[i] = other.array_[i];
     }
 }
@@ -80,7 +80,7 @@ ABS<T>& ABS<T>::operator=(const ABS& rhs) {
     delete[] this->array_;
     this->array_ = temp_array;
 
-    for(int i = 0; i < curr_size_; ++i) {
+    for(std::size_t i = 0; i < curr_size_; ++i) {
         array_[i] = rhs.array_[i];
     }
 
@@ -138,7 +138,7 @@ void ABS<T>::push(const T& data) {
         T* array_new = new T(capacity_ * scale_factor_);
         capacity_ *= scale_factor_;
 
-        for(int i = 0; i < curr_size_; ++i) {
+        for(std::size_t i = 0; i < curr_size_; ++i) {
             array_new[i] = array_[i];
         }
         

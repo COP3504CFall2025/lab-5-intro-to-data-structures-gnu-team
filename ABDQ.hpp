@@ -29,7 +29,7 @@ public:
     ABDQ(ABDQ&& other) noexcept;
     ABDQ& operator=(const ABDQ& other);
     ABDQ& operator=(ABDQ&& other) noexcept;
-    ~ABDQ();
+    ~ABDQ() override;
 
     // Insertion
     void pushFront(const T& item) override;
@@ -45,10 +45,6 @@ public:
 
     // Getters
     std::size_t getSize() const noexcept override;
-
-    // Helper
-    void print() const;
-
 };
 
 // Default Constructor

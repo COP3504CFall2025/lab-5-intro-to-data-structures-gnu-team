@@ -136,7 +136,7 @@ void ABQ<T>::enqueue(const T& data) {
     if(capacity_ == curr_size_) {
         T* temp_array = new T[capacity_ * scale_factor_];
         capacity_ *= scale_factor_;
-        for(int i = 0; i < curr_size_; ++i) {
+        for(std::size_t i = 0; i < curr_size_; ++i) {
             temp_array[i] = array_[i];
         }
         delete[] array_;
@@ -161,7 +161,7 @@ T ABQ<T>::dequeue() {
         throw std::runtime_error("ERROR: dequeue() on empty queue.");
     }
 
-    for(int i = 0; i < curr_size_ - 1; ++i) {
+    for(std::size_t i = 0; i < curr_size_ - 1; ++i) {
         array_[i] = array_[i + 1];
     }
     curr_size_--;
