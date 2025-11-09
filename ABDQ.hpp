@@ -18,9 +18,6 @@ private:
 
     static constexpr std::size_t SCALE_FACTOR = 2;
 
-    //Helper
-    void resize();
-
 public:
     // Big 5
     ABDQ();
@@ -160,7 +157,7 @@ ABDQ<T>::~ABDQ() {
 template <typename T>
 void ABDQ<T>::pushFront(const T& data) {
     if(size_ == capacity_) {
-        resize();
+        ensureCapacity();
     }
     front_ = (front_ - 1) % capacity_;
     data_[front_] = data;
@@ -171,7 +168,7 @@ void ABDQ<T>::pushFront(const T& data) {
 template <typename T>
 void ABDQ<T>::pushBack(const T& data) {
     if(size_ == capacity_) {
-        resize();
+        ensureCapacity();
     }
     data_[back_] = data;
     back_ = (back_ + 1) % capacity_;
@@ -239,7 +236,7 @@ void ABDQ<T>::ensureCapacity() {
 
 template <typename T>
 void ABDQ<T>::shrinkIfNeeded() {
-    if(!((size_ >= 0) && (size_ <= capacity_ / 4))) {
+    if(!(size_ <= capacity_ / 4)) {
         return;
     }
 
