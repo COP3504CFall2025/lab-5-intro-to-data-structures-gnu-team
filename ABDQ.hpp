@@ -245,7 +245,7 @@ void ABDQ<T>::shrinkIfNeeded() {
 
     T* temp_array = new T[capacity_ / SCALE_FACTOR];
     for(std::size_t i = 0; i < size_; ++i ) {
-        std::size_t index = (front + i) % capacity_;
+        std::size_t index = (front_ + i) % capacity_;
         temp_array[i] = data_[index];
     }
 
