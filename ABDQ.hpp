@@ -45,6 +45,10 @@ public:
 
     // Getters
     std::size_t getSize() const noexcept override;
+
+    // Helpers
+    void ensureCapacity();
+    void shrinkIfNeeded();
 };
 
 // Default Constructor
@@ -183,6 +187,7 @@ T ABDQ<T>::popFront() {
     front_ = (front_ + 1) % capacity_;
     size_--;
     return result;
+    shrinkIfNeeded();
 }
 
 template <typename T>
@@ -193,6 +198,7 @@ T ABDQ<T>::popBack() {
     back_ = (back_ - 1) % capacity_;
     T result = data_[back_];
     size_--;
+    shrinkIfNeeded();
     return result;
 }
 
@@ -218,7 +224,7 @@ std::size_t ABDQ<T>::getSize() const noexcept {
 }
 
 template <typename T>
-void ABDQ<T>::resize() {
+void ABDQ<T>::ensureCapacity() {
     T* temp_array = new T[capacity_ * SCALE_FACTOR];
     for(size_t i = 0; i < size_; ++i) {
         size_t index = (front_ + i) % capacity_;
@@ -231,4 +237,23 @@ void ABDQ<T>::resize() {
     data_ = temp_array;
 }
 
+template <typename T>
+void ABDQ<T>::shrinkIfNeeded() {
+    if(!((size_ >= 0) && (size_ <= capacity_ / 4))) {
+        return;
+    }
+
+    T* temp_array = new T[capacity_ / SCALE_FACTOR];
+    for(std::size_t i = 0; i < size_; ++i ) {
+        std::size_t index = (front + i) % capacity_;
+        temp_array[i] = data_[index];
+    }
+
+    front_ = 0;
+    back_ =  size_;
+    capacity_ /= SCALE_FACTOR;
+    delete[] data_;
+    data_ = temp_array;
+    
+}
 
